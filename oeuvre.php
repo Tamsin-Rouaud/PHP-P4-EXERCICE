@@ -1,6 +1,21 @@
 <?php
     require 'header.php';
-    require 'oeuvres.php';
+    require_once(__DIR__ . '/bdd.php');
+
+
+    // Connexion à la base de données via la fonction
+$mysqlClient = connexion();
+
+if ($mysqlClient) {
+    // Requête SQL pour récupérer toutes les oeuvres
+    $sqlQuery = 'SELECT * FROM oeuvres';
+    $oeuvresStatement = $mysqlClient->prepare($sqlQuery); // Préparation de la requête
+    $oeuvresStatement->execute(); // Exécution de la requête
+    $oeuvres = $oeuvresStatement->fetchAll(); // Récupération de tous les résultats
+} else {
+    // En cas d'échec de connexion, afficher un message
+    echo "Erreur de connexion à la base de données.";
+}
 
     // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
     if(empty($_GET['id'])) {
