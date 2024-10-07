@@ -1,40 +1,24 @@
 <?php
     require 'header.php';
     require_once(__DIR__ . '/bdd.php');
+    $mysqlClient = connexion();
+
+ // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
+    if(empty($_GET['id'])) {
+        header('Location: index.php');
+        exit; // est-ce utile pour arrêter le script alors que l'on fait une redirection vers la page d'accueil?
+    }
 
 
     // Connexion à la base de données via la fonction
-$mysqlClient = connexion();
-
-if ($mysqlClient) {
-    // Requête SQL pour récupérer toutes les oeuvres
-    $sqlQuery = 'SELECT * FROM oeuvres';
+    $sqlQuery = 'SELECT * FROM oeuvres WHERE id = :id';
     $oeuvresStatement = $mysqlClient->prepare($sqlQuery); // Préparation de la requête
-    $oeuvresStatement->execute(); // Exécution de la requête
-    $oeuvres = $oeuvresStatement->fetchAll(); // Récupération de tous les résultats
-} else {
-    // En cas d'échec de connexion, afficher un message
-    echo "Erreur de connexion à la base de données.";
-}
+    $oeuvresStatement->execute(['id' => intval($_GET['id'])]); // Exécution de la requête
+    $oeuvre = $oeuvresStatement->fetch(); // Récupération de tous les résultats
 
-    // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
-    if(empty($_GET['id'])) {
-        header('Location: index.php');
-    }
-
-    $oeuvre = null;
-
-    // On parcourt les oeuvres du tableau afin de rechercher celle qui a l'id précisé dans l'URL
-    foreach($oeuvres as $o) {
-        // intval permet de transformer l'id de l'URL en un nombre (exemple : "2" devient 2)
-        if($o['id'] === intval($_GET['id'])) {
-            $oeuvre = $o;
-            break; // On stoppe le foreach si on a trouvé l'oeuvre
-        }
-    }
-
+      
     // Si aucune oeuvre trouvé, on redirige vers la page d'accueil
-    if(is_null($oeuvre)) {
+    if(!$oeuvre) {
         header('Location: index.php');
     }
 ?>
