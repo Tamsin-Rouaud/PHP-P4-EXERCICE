@@ -31,4 +31,4 @@
         <p>Aucune oeuvre disponible.</p>
     <?php endif; ?>
 </div>
-<?php require 'footer.php'; ?>
+<?php require_once(__DIR__.'/footer.php'); ?>
