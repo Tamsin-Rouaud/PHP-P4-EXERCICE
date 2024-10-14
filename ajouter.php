@@ -7,16 +7,16 @@
 
 <form action="traitement.php" method="POST">
     <div class="champ-formulaire">
-        <label for="titre">Titre de l'œuvre</label>
-        <input type="text" name="titre" id="titre" required> <!-- Ajout de l'attribut 'required' pour forcer le remplissage -->
+        <label for="title">Titre de l'œuvre</label>
+        <input type="text" name="title" id="title" required> <!-- Ajout de l'attribut 'required' pour forcer le remplissage -->
     </div>
     <div class="champ-formulaire">
-        <label for="artiste">Auteur de l'œuvre</label>
-        <input type="text" name="artiste" id="artiste" required> <!-- Ajout de 'required' -->
+        <label for="artist">Auteur de l'œuvre</label>
+        <input type="text" name="artist" id="artist" required> <!-- Ajout de 'required' -->
     </div>
     <div class="champ-formulaire">
-        <label for="image">URL de l'image</label>
-        <input type="url" name="image" id="image" required> <!-- Ajout de 'required' et type 'url' pour une meilleure validation -->
+        <label for="picture">URL de l'image</label>
+        <input type="url" name="picture" id="picture" required> <!-- Ajout de 'required' et type 'url' pour une meilleure validation -->
     </div>
     <div class="champ-formulaire">
         <label for="description">Description</label>

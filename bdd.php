@@ -3,7 +3,7 @@
     require_once(__DIR__ . '/config/mysql.php');
 
     // Définition de la fonction 'connexion' pour se connecter à la base de données
-    function connexion(){
+    function getConnected(){
         // Tentative de création d'un nouvel objet PDO pour se connecter à la base de données
         try {
             
