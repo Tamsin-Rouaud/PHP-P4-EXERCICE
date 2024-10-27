@@ -23,7 +23,7 @@ if (empty($_POST['title']) // Vérifie si le champ 'title' est vide
     || empty($_POST['picture'])  // Vérifie si le champ 'image' est vide
     || strlen($_POST['description']) < 3  // Vérifie que la description contient au moins 3 caractères
     || !filter_var($_POST['picture'], FILTER_VALIDATE_URL) // Vérifie que l'URL de l'image est valide
-    || !preg_match('/\.(jpg|jpeg|png|gif)$/i', $_POST['picture']) // Vérifie que l'URL de l'image finit par une extension d'image valide
+    || !preg_match('/\.(jpg|jpeg|png|gif)$/i', $_POST['picture']) // Vérifie que l'URL de l'image finit par une extension d'image valide (ajout consigne)
 ) {
     // Si une des conditions échoue, redirige l'utilisateur vers ajouter.php avec le paramètre 'erreur=true'
     header('Location: ajouter.php?erreur=true');
@@ -51,9 +51,9 @@ $req->execute([
 ]);
 
 
-    // ... (code pour insérer l'oeuvre en base de données ici)
+   
 
-    // Redirection de l'utilisateur vers la page d'accueil avec son oeuvre et insérer message confirmation
+    // Redirection de l'utilisateur vers la page d'accueil avec son oeuvre
 
     header('Location: index.php');
 }
